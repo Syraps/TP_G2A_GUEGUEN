@@ -7,4 +7,8 @@ public class House {
     public void setName(String name){
         this.name = name;
     }
+    public House (String name){
+        this.name = name;
+    }
+
 }

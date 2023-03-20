@@ -37,4 +37,12 @@ public class Wizard {
     public void setPotion(List<Potion> potions) {
         this.potions = potions;
     }
+
+    public Wizard(Pet pet, Wand wand, House house, List<Spell> knownspells, List<Potion> potions){
+        this.pet = pet;
+        this.wand = wand;
+        this.house = house;
+        this.knownspells = knownspells;
+        this.potions = potions;
+    }
 }
