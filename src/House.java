@@ -10,5 +10,4 @@ public class House {
     public House (String name){
         this.name = name;
     }
-
 }

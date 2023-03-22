@@ -1,5 +1,5 @@
 import java.util.List;
-public class Wizard {
+public class Wizard extends Character{
     private Pet pet;
     private Wand wand;
     private House house;
@@ -38,7 +38,8 @@ public class Wizard {
         this.potions = potions;
     }
 
-    public Wizard(Pet pet, Wand wand, House house, List<Spell> knownspells, List<Potion> potions){
+    public Wizard(Pet pet, Wand wand, House house, List<Spell> knownspells, List<Potion> potions, String name){
+        super(name,100);
         this.pet = pet;
         this.wand = wand;
         this.house = house;
