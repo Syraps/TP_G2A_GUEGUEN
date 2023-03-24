@@ -28,12 +28,16 @@ public class GameLogic {
         System.out.println(title);
         printSeparator(30);
     }
-    public static void anythingToContinue(){
+    public static void anythingToContinue() {
         System.out.println("\nAppuyez sur Entrée pour continuer...");
-        scanner.next();
+        try {
+            System.in.read();
+        } catch (Exception e) {
+        }
     }
-    public static void heal(){
-        //if ( House.                == "Hufflepuff"){
+    //public static void heal(){
+        //if (Wizard.getHouse().getName()== "Hufflepuff")
+      //  { Wizard.getHp() = Wizard.getHp() + Potion.getBonus();}
 
     }
-    }
+    //}

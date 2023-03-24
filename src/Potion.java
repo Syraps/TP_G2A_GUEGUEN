@@ -1,26 +1,22 @@
 public class Potion {
-    private int petitePotion, moyennePotion, grandePotion;
-    public int getPetitePotion(){
-        return petitePotion;
+    private int potion;
+    private String name;
+    public int getPotion() {
+        return potion;
     }
-    public int getMoyennePotion() {
-        return moyennePotion;
+    public void setPotion(int Potion) {
+        this.potion = potion;
     }
-    public int getGrandePotion() {
-        return grandePotion;
+    public Potion (int potion, String name) {
+        this.potion = potion;
+        this.name = name;
     }
-    public void setPetitePotion(int petitePotion) {
-        this.petitePotion = petitePotion;
+
+    public String getName() {
+        return name;
     }
-    public void setMoyennePotion(int moyennePotion) {
-        this.moyennePotion = moyennePotion;
-    }
-    public void setGrandePotion(int grandePotion) {
-        this.grandePotion =grandePotion;
-    }
-    public Potion (int petitePotion, int moyennePotion, int grandePotion){
-        this.petitePotion = petitePotion;
-        this.moyennePotion = moyennePotion;
-        this.grandePotion =grandePotion;
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

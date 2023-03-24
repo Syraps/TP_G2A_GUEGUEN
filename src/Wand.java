@@ -1,3 +1,5 @@
+import com.sun.glass.ui.Size;
+
 public class Wand {
     private Core core;
     private int size;
@@ -18,8 +20,6 @@ public class Wand {
         this.core = core;
         this.size = size;
     }
-    public void Wizard (){
-    System.out.print("A wand will choose its owner");
-    //for
-    System.out.println(" 1. PHOENIX_FEATHER\n 2.DRAGON_HEARTSTRING\n 3.UNICORN_TAIL_HAIR\n 4.BASILISK_HORN\n 5.THUNDERBIRD_TAIL_FEATHER");
-    }}
+
+
+    }
