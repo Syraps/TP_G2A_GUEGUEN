@@ -35,9 +35,5 @@ public class GameLogic {
         } catch (Exception e) {
         }
     }
-    //public static void heal(){
-        //if (Wizard.getHouse().getName()== "Hufflepuff")
-      //  { Wizard.getHp() = Wizard.getHp() + Potion.getBonus();}
 
     }
-    //}

@@ -3,7 +3,7 @@ public class Character {
     private static int Hp;
     private int maxHp;
 
-    public String getName() {
+    public static String getName() {
         return name;
     }
     public static int getHp() {
@@ -13,17 +13,17 @@ public class Character {
     public void setName(String name) {
         this.name = name;
     }
-    public void setHp(int Hp) {
+    public static void setHp(int Hp) {
         this.Hp = 100;
     }
     public Character(String name, int maxHp){
         this.name = name;
         this.maxHp = maxHp;
-        this.Hp = maxHp;
+        this.Hp = Hp;
 
     }
 
-    public int getMaxHp() {
+    public static int getMaxHp() {
         return maxHp;
     }
 

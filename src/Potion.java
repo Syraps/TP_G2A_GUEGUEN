@@ -1,14 +1,21 @@
 public class Potion {
-    private int potion;
+    private static int nbPotion;
     private String name;
-    public int getPotion() {
-        return potion;
+
+    public static int getNbPotion() {
+        return nbPotion;
     }
-    public void setPotion(int Potion) {
-        this.potion = potion;
+
+    public static void setNbPotion(int nbPotion) {
+        Potion.nbPotion = nbPotion;
     }
-    public Potion (int potion, String name) {
-        this.potion = potion;
+
+    public int getnbPotion() {
+        return nbPotion;
+    }
+
+    public Potion ( int nbPotion, String name) {
+        this.nbPotion = nbPotion;
         this.name = name;
     }
 
