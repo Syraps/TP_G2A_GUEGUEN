@@ -16,16 +16,16 @@ public class SortingHat {
         House chooseHouse = null;
         if (var <= 1){
             System.out.print("Gryffindor");
-            chooseHouse = new House("Gryffindor", 0.75f, 1.0f, 1.0f, 1.5f);
+            chooseHouse = new House("Gryffindor", 75, 1.0f, 1.0f, 0.5f);
         } else if ( var <= 2){
             System.out.print("Slytherin");
-            chooseHouse = new House("Slytherin", 0.75f, 1.0f, 1.5f, 1.0f );
+            chooseHouse = new House("Slytherin", 75, 1.0f, 1.5f, 1.0f );
         } else if ( var <= 3){
             System.out.print("Ravenclaw");
-            chooseHouse = new House("Ravenclaw", 0.9f, 1.0f, 1.0f, 1.0f );
+            chooseHouse = new House("Ravenclaw", 90, 1.0f, 1.0f, 1.0f );
         } else if (var <= 4) {
             System.out.print("Hufflepuff");
-            chooseHouse = new House("Hufflepuff", 0.75f, 1.5f,1.0f,1.0f );
+            chooseHouse = new House("Hufflepuff", 75, 1.5f,1.0f,1.0f );
 
         }
         return chooseHouse;

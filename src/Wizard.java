@@ -2,11 +2,10 @@ import java.util.List;
 public class Wizard extends Character {
     private Pet pet;
     private Wand wand;
-    private static House house;
+    private House house;
     private List<Spell> knownspells;
     private List<Potion> potions;
     private int coefDamage;
-
 
     public Pet getPet() {
         return pet;
@@ -16,7 +15,7 @@ public class Wizard extends Character {
         return wand;
     }
 
-    public static House getHouse() {
+    public House getHouse() {
         return house;
     }
 
@@ -106,85 +105,148 @@ public class Wizard extends Character {
         }
         return choosePet;
     }
-    public Wizard getBetter() {
+    public Wizard getBetter(Wizard wizard) {
         int choice = GameLogic.readInt("->", 2);
         if (choice == 1){
-            this.setMaxHp((int) (this.getMaxHp() * 1.2));
-            this.setHp((this.getMaxHp()));
-            System.out.print("your Hp are now " + this.getHp() + "/" + this.getMaxHp());
+            wizard.setMaxHp((int) (wizard.getMaxHp() * 1.2));
+            wizard.setHp((wizard.getMaxHp()));
+            System.out.print("your Hp are now " + wizard.getHp() + "/" + wizard.getMaxHp());
             GameLogic.anythingToContinue();
         }else if (choice == 2){
-            this.setCoefDamage((int) (this.getCoefDamage() + 0.25));
-            System.out.print("Your damage is now " + this.getCoefDamage() + " times better");
+            wizard.setCoefDamage((int) (wizard.getCoefDamage() + 0.25));
+            System.out.print("Your damage is now " + wizard.getCoefDamage() + " times better");
             GameLogic.anythingToContinue();
         }
         return null;
     }
 
-    public Potion usePotion() {
-        int choice = GameLogic.readInt("->", 3);
-        if (this.getPotion().get(choice).getName().equals("low Hp potion")) {
-            System.out.print("You used a low Hp potion");
-            this.setHp((int) (this.getHp() + 20 * house.getPotionF()));
-            if (this.getHp() > this.getMaxHp()) {
-                this.setHp(this.getMaxHp());
+    public void usePotion(Wizard wizard) {
+        int choice = GameLogic.readInt(" ", wizard.getPotion().size());
+        if (wizard.getPotion().get(choice - 1 ).getnbPotion() != 0){
+            if (wizard.getPotion().get(choice- 1).getName().equals("low Hp potion")) {
+                System.out.print("You used a low Hp potion");
+                wizard.setHp((int) (wizard.getHp() + 20 * house.getPotionF()));
+                wizard.getPotion().get(choice - 1 ).setNbPotion(wizard.getPotion().get(choice - 1 ).getNbPotion() - 1);
+                GameLogic.anythingToContinue();
+            } else if (wizard.getPotion().get(choice - 1).getName().equals("mid Hp potion")) {
+                System.out.print("You used a mid Hp potion");
+                wizard.setHp((int) (wizard.getHp() + 40 * house.getPotionF()));
+                wizard.getPotion().get(choice - 1 ).setNbPotion(wizard.getPotion().get(choice - 1 ).getNbPotion() - 1);
+                GameLogic.anythingToContinue();
+            } else if (wizard.getPotion().get(choice - 1).getName().equals("high Hp potion")) {
+                System.out.print("You used a high Hp potion");
+                this.setHp((int) (wizard.getHp() + 60 * house.getPotionF()));
+                wizard.getPotion().get(choice - 1 ).setNbPotion(wizard.getPotion().get(choice - 1 ).getNbPotion() - 1);
+                GameLogic.anythingToContinue();
             }
-            GameLogic.anythingToContinue();
-        } else if (this.getPotion().get(choice).getName().equals("mid Hp potion")) {
-            System.out.print("You used a mid Hp potion");
-            this.setHp((int) (this.getHp() + 40 * house.getPotionF()));
-            if (this.getHp() > this.getMaxHp()) {
-                this.setHp(this.getMaxHp());
-            }
-            GameLogic.anythingToContinue();
-        } else if (this.getPotion().get(choice).getName().equals("high Hp potion")) {
-            System.out.print("You used a high Hp potion");
-            this.setHp((int) (this.getHp() + 60 * house.getPotionF()));
-            if (this.getHp() > this.getMaxHp()) {
-                this.setHp(this.getMaxHp());
-            }
+        }else{
+            System.out.println("You don't have this potion !");
             GameLogic.anythingToContinue();
         }
-    return usePotion();
+
+        if (wizard.getHp() > wizard.getMaxHp()) {
+            wizard.setHp(wizard.getMaxHp());
+        }
     }
-    public Wizard defend(){
-    this.setHp((int) (this.getHp() - Enemy.getDamage() * 0.25));
-    System.out.print("Vous vous défendez.");
-    return defend();
+    public void defend(){
+    System.out.print("PROTEGO !");
+    GameLogic.anythingToContinue();
     }
 
 
 
-    public void Battle1() {
+    public void Level1(Enemy enemy, Wizard wizard) {
 
         GameLogic.clearConsole();
         GameLogic.printHeading("You encountered the Troll ! You will have to use Wingardium Leviosa to fight it.");
         GameLogic.anythingToContinue();
-        this.battle();
+        battle(enemy, wizard);
+    }
+    public void Level2(Enemy enemy, Wizard wizard) {
+
+        GameLogic.clearConsole();
+        System.out.println("During your second year at school, you learned the spell Accio.\n" +
+                " But a monster is roarming inside the chamber of secrets... ");
+        GameLogic.anythingToContinue();
+        GameLogic.printHeading(" OH NO !\n You encountered the Basilisk in the Chambers of secrets !");
+        GameLogic.anythingToContinue();
+        if (wizard.getHouse().getName() == "Gryffindor"){
+            System.out.print("you have the sword of Godric Gryffindor to slay the Basilisk !");
+            Spell sword = new Spell("Sword", 0);
+            wizard.getSpell().add(sword);
+            for (int i=0; i<wizard.getSpell().size(); i++) {
+                if (wizard.getSpell().get(i).getName().equals("Accio")) {
+                    wizard.getSpell().get(i).setCounter(wizard.getSpell().get(i).getCounter() - 50);
+                }
+            } GameLogic.anythingToContinue();
+        }else {
+            System.out.print("you have to rip off one of the fangs of the Basilisk to slay it !");
+        } GameLogic.anythingToContinue();
+        battle(enemy, wizard);
+        //wizard.getSpell().remove(sword);
+
+    }
+    public void Level3(Enemy enemy, Wizard wizard){
+        GameLogic.clearConsole();
+        System.out.println("You go to your 3rd year of magic school where you learn a new spell: Expectro Patronum");
+        GameLogic.anythingToContinue();
+        System.out.println("\n When Wandering into the Forbbidden Forest's lake, you are surrounded by 6 Dementor !");
+        System.out.println("\n Use the spell that you learned this year !\n it will make them flee");
+        GameLogic.anythingToContinue();
+        battle(enemy, wizard);
 
     }
 
-    public void battle() {
-        this.setHp(this.getMaxHp());
-        Enemy.setHp(Enemy.getMaxHp());
-        while (Enemy.getHp() != 0) {
+    public void battle(Enemy enemy, Wizard wizard) {
+        wizard.setHp(wizard.getMaxHp());
+        enemy.setHp(enemy.getMaxHp());
+        while (enemy.getHp() > 0) {
+            if (wizard.getHp() <= 0){
+                System.out.println("You are dead... Not a big surprise.");
+                GameLogic.anythingToContinue();
+                System.exit(0);
+            }
             GameLogic.clearConsole();
-            GameLogic.printHeading(Enemy.getName() + "\nHP:" + Enemy.getHp() + "/" + Enemy.getMaxHp());
-            GameLogic.printHeading(this.getName() + "\nHP:" + this.getHp() + "/" + this.getMaxHp());
+            GameLogic.printHeading(enemy.getName() + "\nHP:" + enemy.getHp() + "/" + enemy.getMaxHp());
+            GameLogic.printHeading(wizard.getName() + "\nHP:" + wizard.getHp() + "/" + wizard.getMaxHp());
             System.out.print("(1) Spell \n(2) Defend \n(3) Use potion");
-            int input = GameLogic.readInt("-> ", 3);
+            int input = GameLogic.readInt(" ", 3);
             if (input == 1) {
-                //Spell
+                for (int i=0; i<wizard.getSpell().size(); i++) {
+                    System.out.println(i+1 + ". " + wizard.getSpell().get(i).getName());
+                }
+                cast(enemy, wizard);
             } else if (input == 2) {
                 defend();
             } else {
-                System.out.println("(1) Potion of low Hp \n(2) Potion of mid Hp \n(3) Potion of high Hp");
-                usePotion();
+                System.out.print("(1) Low Hp potion\n(2) Mid Hp Potion\n(3) High Hp Potion");
+                    usePotion(wizard);
+                }
             }
-        }
         GameLogic.clearConsole();
-        System.out.print(" You defeated the " + Enemy.getName() + ". \nWould you like to \n(1) Upgrade your life \n(2) Upgrade your damage");
-        getBetter();
+        System.out.print(" You defeated the " + enemy.getName() + ". \nWould you like to \n(1) Upgrade your life \n(2) Upgrade your damage");
+        getBetter(wizard);
+    }
+    public void cast(Enemy enemy, Wizard wizard){
+        int choice = GameLogic.readInt(" ", wizard.getSpell().size());
+        if (this.getSpell().get(choice-1).getName().equals("Wingardium Leviosa")){
+            System.out.println("You are using Wingardium Leviosa");
+            Spell.WinLev(enemy, wizard);
+        } else if (this.getSpell().get(choice-1).getName().equals("Accio")){
+            System.out.println("You are using Accio");
+            Spell.Accio(enemy, wizard);
+        } else if (this.getSpell().get(choice-1).getName().equals("Expectro Patronum")) {
+            System.out.println("You are using Expectro Patronum");
+            Spell.ExpectroPatronum(enemy, wizard);
+        } else if (this.getSpell().get(choice-1).getName().equals("Sword")){
+            System.out.println("You are trying to pierce the Basilisk using the sword");
+            Spell.Sword(enemy, wizard);
+        }else if (this.getSpell().get(choice-1).getName().equals("Fang")){
+            System.out.println("You are trying to pierce the Basilisk using his fang");
+            Spell.Sword(enemy, wizard);
+            GameLogic.anythingToContinue();
+        }
+
     }
 
     public int getCoefDamage() {

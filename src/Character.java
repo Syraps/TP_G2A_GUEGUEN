@@ -1,20 +1,20 @@
 public class Character {
     private String name;
-    private static int Hp;
+    private int Hp;
     private int maxHp;
 
-    public static String getName() {
+    public String getName() {
         return name;
     }
-    public static int getHp() {
+    public int getHp() {
         return Hp;
     }
 
     public void setName(String name) {
         this.name = name;
     }
-    public static void setHp(int Hp) {
-        this.Hp = 100;
+    public void setHp(int Hp) {
+        this.Hp = Hp;
     }
     public Character(String name, int maxHp){
         this.name = name;
@@ -23,7 +23,7 @@ public class Character {
 
     }
 
-    public static int getMaxHp() {
+    public int getMaxHp() {
         return maxHp;
     }
 

@@ -12,4 +12,5 @@ public class Story {
     public void setAct(int act) {
         this.act = act;
     }
+
 }
