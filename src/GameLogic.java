@@ -10,7 +10,7 @@ public class GameLogic {
                 input = Integer.parseInt(scanner.next());
             }catch(Exception e) {
                 input = -1;
-                System.out.println("Entrez un chiffre s'il vous plaît !");
+                System.out.println("Enter a number please !");
             }
             }while(input < 1 || input > userChoices);
             return input;
@@ -29,7 +29,7 @@ public class GameLogic {
         printSeparator(30);
     }
     public static void anythingToContinue() {
-        System.out.println("\nAppuyez sur Entrée pour continuer...");
+        System.out.println("\nPress Enter to continue...");
         try {
             System.in.read();
         } catch (Exception e) {

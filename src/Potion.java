@@ -1,13 +1,13 @@
 public class Potion {
-    private static int nbPotion;
+    private int nbPotion;
     private String name;
 
-    public static int getNbPotion() {
+    public int getNbPotion() {
         return nbPotion;
     }
 
-    public static void setNbPotion(int nbPotion) {
-        Potion.nbPotion = nbPotion;
+    public void setNbPotion(int nbPotion) {
+        this.nbPotion = nbPotion;
     }
 
     public int getnbPotion() {

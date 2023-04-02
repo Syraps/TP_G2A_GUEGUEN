@@ -1,13 +1,13 @@
 public class Enemy extends Character{
-    private static int damage;
-    private static int position;
-    public Enemy(String name, int maxHp, int damage, int position) {
+    private int damage;
+    private int counter;
+    public Enemy(String name, int maxHp, int damage, int counter) {
         super(name, maxHp);
         this.damage = damage;
-        this.position = position;
+        this.counter = counter;
     }
 
-    public static int getDamage() {
+    public int getDamage() {
         return damage;
     }
 
@@ -15,11 +15,11 @@ public class Enemy extends Character{
         this.damage = damage;
     }
 
-    public static int getPosition() {
-        return position;
+    public int getCounter() {
+        return counter;
     }
 
-    public void setPosition(int position) {
-        this.position = position;
+    public void setCounter(int counter) {
+        this.counter = counter;
     }
 }
