@@ -67,6 +67,7 @@ public class ForbiddenSpell extends AbstractSpell {
             GameLogic.anythingToContinue();
         } else {
             System.out.println("Seems like Voldemort can't focus at all.");
+            boss.setAction(false);
             GameLogic.anythingToContinue();
         }
     }

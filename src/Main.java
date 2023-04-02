@@ -8,14 +8,15 @@ public class Main {
         Enemy troll = new Enemy( "Troll",100, 10, 0);
         Enemy basilisk = new Enemy( "Basilisk",200, 40, 0);
         Enemy Nada = new Enemy("Nada", 10, 0, 0);
-        Boss Nothing = new Boss("Nothing", 10, null, false,0);
-        Boss PetigroVoldemort = new Boss("Peter Petigrow and Voldemort", 400,null,false, 75);
-        Boss DeathEaters = new Boss("Death Eaters", 600, null, false, 80);
-        Boss FinalBoss = new Boss("Bellatrix Lestrange and Voldemort", 1000, null, false, 90);
+        Boss Nothing = new Boss("Nothing", 10, null, false,0, null);
+        Boss PetigroVoldemort = new Boss("Peter Petigrow and Voldemort", 400,null,false, 75, null);
+        Boss DeathEaters = new Boss("Death Eaters", 600, null, false, 80, null);
+        Boss FinalBoss = new Boss("Bellatrix Lestrange and Voldemort", 1000, null, false, 90, null);
         Enemy Dolores = new Enemy("Dolores Umbridge", 500, 30, 0);
-        ForbiddenSpell Imperium = new ForbiddenSpell("Imperium", 20);
+        ForbiddenSpell Imperium = new ForbiddenSpell("Imperium", 30);
         ForbiddenSpell Doloris = new ForbiddenSpell("Doloris", 40);
         ForbiddenSpell AvadaKedavra = new ForbiddenSpell("Avada Kedavra",99999999);
+        Wand Bwand = new Wand(null, 0);
         PetigroVoldemort.setForbiddenSpell(new ArrayList<>());
         PetigroVoldemort.getForbiddenSpell().add(Imperium);
         DeathEaters.setForbiddenSpell(new ArrayList<>());
@@ -25,6 +26,7 @@ public class Main {
         FinalBoss.getForbiddenSpell().add(Imperium);
         FinalBoss.getForbiddenSpell().add(Doloris);
         FinalBoss.getForbiddenSpell().add(AvadaKedavra);
+        FinalBoss.setWand(Bwand.chooseWand(FinalBoss));
         //Lancement de l'introduction et de chaque niveau
         player.Introduction(player);
         player.Level1(troll, Nothing, player);

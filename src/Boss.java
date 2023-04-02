@@ -4,12 +4,14 @@ public class Boss extends Character {
     private List<ForbiddenSpell> forbiddenSpell;
     private boolean action;
     private int accuracy;
+    private Wand wand;
 
-    public Boss(String name, int maxHp, List<ForbiddenSpell> forbiddenSpell, boolean action, int accuracy) {
+    public Boss(String name, int maxHp, List<ForbiddenSpell> forbiddenSpell, boolean action, int accuracy, Wand wand) {
         super(name, maxHp);
         this.forbiddenSpell = forbiddenSpell;
         this.action = action;
         this.accuracy = accuracy;
+        this.wand = wand;
     }
 
     public boolean isAction() {
@@ -34,5 +36,13 @@ public class Boss extends Character {
 
     public void setAccuracy(int accuracy) {
         this.accuracy = accuracy;
+    }
+
+    public Wand getWand() {
+        return wand;
+    }
+
+    public void setWand(Wand wand) {
+        this.wand = wand;
     }
 }
