@@ -18,6 +18,10 @@ public class GameLogic {
         for(int i = 0; i < 100; i++)
             System.out.println();
     }
+    public static void readString(Wizard wizard){
+        String name = scanner.nextLine();
+        wizard.setName(name);
+    }
     public static void printSeparator(int n){
         for (int i = 0;i < n; i++)
             System.out.print("-");

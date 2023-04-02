@@ -2,20 +2,16 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
-        SortingHat hat = new SortingHat(null);
-        Wizard player = new Wizard(null, null, null, null, null, null, 1, false);
-        Potion potionL = new Potion(2,"low Hp potion");
-        Potion potionM = new Potion(2,"mid Hp potion");
-        Potion potionH = new Potion(2,"high Hp potion");
+        //Création des objets pour les ennemis, le joueur et les sorts interdits
+        Wizard player = new Wizard(null, null, null, null, null, null, 1, false, 0);
         Enemy dementor = new Enemy("Dementor",6, 5, 0);
-        Enemy troll = new Enemy( "Troll",100, 5, 0);
-        Enemy basilisk = new Enemy( "Basilisk",200, 15, 0);
-        Spell portoloin = new Spell("Accio",550);
-        Spell WinLev = new Spell("Wingardium Leviosa", 0);
-        Spell ExpectroPatronum = new Spell("Expectro Patronum", 0);
-        Spell Sectumsempra = new Spell("Sectumsempra", 0);
+        Enemy troll = new Enemy( "Troll",100, 10, 0);
+        Enemy basilisk = new Enemy( "Basilisk",200, 40, 0);
+        Enemy Nada = new Enemy("Nada", 10, 0, 0);
+        Boss Nothing = new Boss("Nothing", 10, null, false,0);
         Boss PetigroVoldemort = new Boss("Peter Petigrow and Voldemort", 400,null,false, 75);
         Boss DeathEaters = new Boss("Death Eaters", 600, null, false, 80);
+        Boss FinalBoss = new Boss("Bellatrix Lestrange and Voldemort", 1000, null, false, 90);
         Enemy Dolores = new Enemy("Dolores Umbridge", 500, 30, 0);
         ForbiddenSpell Imperium = new ForbiddenSpell("Imperium", 20);
         ForbiddenSpell Doloris = new ForbiddenSpell("Doloris", 40);
@@ -25,26 +21,19 @@ public class Main {
         DeathEaters.setForbiddenSpell(new ArrayList<>());
         DeathEaters.getForbiddenSpell().add(Imperium);
         DeathEaters.getForbiddenSpell().add(Doloris);
-        player.setPotion(new ArrayList<>());
-        player.setSpell(new ArrayList<>());
-        player.getSpell().add(WinLev);
-        player.getPotion().add(potionL);
-        player.getPotion().add(potionM);
-        player.getPotion().add(potionH);
-        player.chooseWand();
-        GameLogic.anythingToContinue();
-        player.setHouse(hat.chooseHouse());
-        GameLogic.anythingToContinue();
-        player.choosePet();
-        player.Level1(troll, player);
-        player.getSpell().add(portoloin);
-        player.Level2(basilisk, player);
-        player.getSpell().add(portoloin);
-        player.getSpell().add(ExpectroPatronum);
-        player.Level3(dementor, player);
-        player.Level4(PetigroVoldemort, player);
-        player.Level5(Dolores, player);
-        player.getSpell().add(Sectumsempra);
+        FinalBoss.setForbiddenSpell(new ArrayList<>());
+        FinalBoss.getForbiddenSpell().add(Imperium);
+        FinalBoss.getForbiddenSpell().add(Doloris);
+        FinalBoss.getForbiddenSpell().add(AvadaKedavra);
+        //Lancement de l'introduction et de chaque niveau
+        player.Introduction(player);
+        player.Level1(troll, Nothing, player);
+        player.Level2(basilisk, Nothing, player);
+        player.Level3(dementor, Nothing, player);
+        player.Level4(PetigroVoldemort, Nada, player);
+        player.Level5(Dolores, Nothing, player);
+        player.Level6(DeathEaters, Nada, player);
+        player.Level7(FinalBoss, Nada, player);
 
     }
 }
