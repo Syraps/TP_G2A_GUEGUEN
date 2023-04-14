@@ -15,7 +15,7 @@ public class Spell extends AbstractSpell {
                System.out.print("\nyou took " + enemy.getDamage() * wizard.getHouse().getResistance() + " from " + enemy.getName());
                GameLogic.anythingToContinue();
 
-       }else if(accuracy > wizard.getHouse().getAccuracy() && boss.getName() == "Nothing"){
+       }else if(accuracy > wizard.getHouse().getAccuracy() && boss.getName() == "Nothing" || enemy.getName().equals("Dementor")){
            System.out.print("You failed your attack.");
            GameLogic.anythingToContinue();
            wizard.setHp((int) (wizard.getHp() - enemy.getDamage() * wizard.getHouse().getResistance()));
@@ -46,13 +46,16 @@ public class Spell extends AbstractSpell {
                         GameLogic.anythingToContinue();}
             }} else if (accuracy <= wizard.getHouse().getAccuracy() && boss.getName().equals("Peter Petigrow and Voldemort") && enemy.getName() == "Nada"){
             for (int i=0; i<wizard.getSpell().size(); i++) {
-                if( wizard.getSpell().get(i).getName().equals("Accio") && wizard.getSpell().get(i).getCounter() > 0) {
-                    wizard.getSpell().get(i).setCounter(wizard.getSpell().get(i).getCounter() - 50);
-                    System.out.print("The portkey is " + wizard.getSpell().get(i).getCounter() + "m away from you !");
-                    GameLogic.anythingToContinue();
-                }if (wizard.getSpell().get(i).getName().equals("Accio") && wizard.getSpell().get(i).getCounter() <= 0) {
-                    System.out.print("You have reached the portkey and you used it");
-                    boss.setHp(-10);
+                if (wizard.getSpell().get(i).getName().equals("Accio")) {
+                    if (wizard.getSpell().get(i).getCounter() > 0) {
+                        wizard.getSpell().get(i).setCounter(wizard.getSpell().get(i).getCounter() - 50);
+                    }
+                    if (wizard.getSpell().get(i).getCounter() <= 0) {
+                        System.out.print("You have reached the portkey and you used it");
+                        boss.setHp(-10);
+                    } else {
+                        System.out.print("The portkey is " + wizard.getSpell().get(i).getCounter() + "m away from you !");
+                    }
                     GameLogic.anythingToContinue();
                 }
             }
@@ -104,6 +107,7 @@ public class Spell extends AbstractSpell {
             System.out.print("You failed your attack.");
             GameLogic.anythingToContinue();
             System.out.print(enemy.getName() + "is attacking.");
+            wizard.setHp((int) (wizard.getHp() - enemy.getDamage() * wizard.getHouse().getResistance()));
             GameLogic.anythingToContinue();
         }
     }

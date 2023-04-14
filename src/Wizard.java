@@ -109,34 +109,32 @@ public class Wizard extends Character {
     public Pet choosePet(Wizard wizard) {
         System.out.print("Here is your pet...");
         //valeur random entre 1 et 5
-        double var = Math.random() * (6 - 1);
+        long var = Math.round(Math.random() * (6 - 1));
         Pet choosePet = null;
-        if (var <= 1) {
-            //on assigne le chat a choose pet
-            choosePet = Pet.CAT;
-            wizard.setPet(choosePet);
-            System.out.print("\nYour pet is a  " + choosePet);
-        } else if (var <= 2) {
-            //on assigne le hibou a choose pet
-            choosePet = Pet.OWL;
-            wizard.setPet(choosePet);
-            System.out.print("\nYour pet is a  " + choosePet);
-        } else if (var <= 3) {
-            //on assigne le rat a choose pet
-            choosePet = Pet.RAT;
-            wizard.setPet(choosePet);
-            System.out.print("\nYour pet is a  " + choosePet);
-        } else if (var <= 4) {
-            //on assigne le lapin a choose pet
-            choosePet = Pet.RABBIT;
-            wizard.setPet(choosePet);
-            System.out.print("\nYour pet is a  " + choosePet);
-        } else if (var <= 5) {
-            //on assigne le crapeau a choose pet
-            choosePet = Pet.TOAD;
-            wizard.setPet(choosePet);
-            System.out.print("\nYour pet is a  " + choosePet);
+        switch ((int)var) {
+            case 1:
+                //on assigne le chat a choose pet
+                choosePet = Pet.CAT;
+                break;
+            case 2:
+                //on assigne le hibou a choose pet
+                choosePet = Pet.OWL;
+                break;
+            case 3:
+                //on assigne le rat a choose pet
+                choosePet = Pet.RAT;
+                break;
+            case 4:
+                //on assigne le lapin a choose pet
+                choosePet = Pet.RABBIT;
+                break;
+            case 5:
+                //on assigne le crapeau a choose pet
+                choosePet = Pet.TOAD;
+                break;
         }
+        wizard.setPet(choosePet);
+        System.out.print("\nYour pet is a  " + choosePet);
         return choosePet;
     }
 
@@ -158,26 +156,23 @@ public class Wizard extends Character {
 
     public void usePotion(Wizard wizard) {
         int choice = GameLogic.readInt(" ", wizard.getPotion().size());
+        String namePotion = wizard.getPotion().get(choice - 1).getName();
+        int powPotion = 0;
         if (wizard.getPotion().get(choice - 1).getnbPotion() != 0) {
-            if (wizard.getPotion().get(choice - 1).getName().equals("low Hp potion")) {
+            if (namePotion.equals("low Hp potion")) {
                 //augmentation de 20 pv + modificateur de la maison
-                System.out.print("You used a low Hp potion");
-                wizard.setHp((int) (wizard.getHp() + 20 * house.getPotionF()));
-                wizard.getPotion().get(choice - 1).setNbPotion(wizard.getPotion().get(choice - 1).getNbPotion() - 1);
-                GameLogic.anythingToContinue();
-            } else if (wizard.getPotion().get(choice - 1).getName().equals("mid Hp potion")) {
+                powPotion = 30;
+            } else if (namePotion.equals("mid Hp potion")) {
                 //augmentation de 40 pv + modificateur de la maison
-                System.out.print("You used a mid Hp potion");
-                wizard.setHp((int) (wizard.getHp() + 40 * house.getPotionF()));
-                wizard.getPotion().get(choice - 1).setNbPotion(wizard.getPotion().get(choice - 1).getNbPotion() - 1);
-                GameLogic.anythingToContinue();
-            } else if (wizard.getPotion().get(choice - 1).getName().equals("high Hp potion")) {
+                powPotion = 50;
+            } else if (namePotion.equals("high Hp potion")) {
                 //augmentation de 60 pv + modificateur de la maison
-                System.out.print("You used a high Hp potion");
-                this.setHp((int) (wizard.getHp() + 60 * house.getPotionF()));
-                wizard.getPotion().get(choice - 1).setNbPotion(wizard.getPotion().get(choice - 1).getNbPotion() - 1);
-                GameLogic.anythingToContinue();
+                powPotion = 80;
             }
+            wizard.setHp((int) (wizard.getHp() + powPotion * house.getPotionF()));
+            wizard.getPotion().get(choice - 1).setNbPotion(wizard.getPotion().get(choice - 1).getNbPotion() - 1);
+            System.out.print("You used a " + namePotion);
+            GameLogic.anythingToContinue();
         } else {
             //cas ou le wizard n'a pas de potion
             System.out.println("You don't have this potion !");
@@ -212,7 +207,7 @@ public class Wizard extends Character {
         //fonction qui enclenche le niveau 2
         GameLogic.clearConsole();
         System.out.println("During your second year at school, you learned the spell Accio.\n" +
-                " But a monster is roarming inside the chamber of secrets... ");
+                " But a monster is roaming inside the chamber of secrets... ");
         GameLogic.anythingToContinue();
         GameLogic.printHeading(" OH NO !\n You encountered the Basilisk in the Chamber of secrets !");
         GameLogic.anythingToContinue();
@@ -283,7 +278,7 @@ public class Wizard extends Character {
     public void Level6(Boss boss, Enemy enemy, Wizard wizard){
         //fonction qui enclenche le niveau 6
         GameLogic.clearConsole();
-        System.out.println("It is now your 5th year of magic school, war is at the door and you now that there is some Death eaters Among Us.");
+        System.out.println("It is now your 6th year of magic school, war is at the door and you now that there is some Death eaters Among Us.");
         System.out.println("\n You learned in secret the spell Sectumsempra that will bring a lot of damage to your enemies");
         GameLogic.anythingToContinue();
         if (wizard.getHouse().getName().equals("Slytherin")){
@@ -318,9 +313,8 @@ public class Wizard extends Character {
         //fonction qui enclenche le niveau 7
         GameLogic.clearConsole();
         System.out.println(" This is the final battle between you and Voldemort\n Belatrix Lestrange is participating too to destroy you. ");
-        System.out.println("\n You are lucky to know the spell Expelliarmus to disarm your opponent and stun him for a short periode of time.");
-        GameLogic.anythingToContinue();
-        System.out.println("\n Because Voldemort knows the spell Avada Kedavra which kill you instantly.");
+        System.out.println("\n You are lucky to know the spell Expelliarmus to disarm your opponent and stun him for a short period of time,");
+        System.out.println("\n because Voldemort knows the spell Avada Kedavra which kill you instantly.");
         System.out.println("\n Go and fight " + wizard.getName() + "! And return victorious !");
         GameLogic.anythingToContinue();
         //condition si le coeur des baguettes sont les memes
@@ -456,22 +450,41 @@ public class Wizard extends Character {
 
     }
     public void badCast(Boss boss, Wizard wizard){
-        double cast = Math.random() * (4 - 1);
-        if (cast < 1 && cast >= 0 || boss.getName().equals("Peter Petigrow and Voldemort") && !boss.isAction()){
-            System.out.println(boss.getName() + " has used Imperium to make yourself hurt.");
-            GameLogic.anythingToContinue();
-            ForbiddenSpell.Imperium(boss, wizard);
-        } else if (cast < 2 && cast >= 1 && boss.getName() != "Peter Petigrow and Voldemort") {
-            System.out.println(boss.getName() + " has used Doloris to inflict you pain.");
-            GameLogic.anythingToContinue();
-            ForbiddenSpell.Doloris(boss, wizard);
-        } else if (cast < 3 && cast >= 2 && boss.getName().equals("Death Eaters")) {
-            System.out.println(boss.getName() + " has used Doloris to inflict you pain.");
-            GameLogic.anythingToContinue();
-            ForbiddenSpell.Doloris(boss, wizard);
-    }else if (cast < 3 && cast >= 2 && boss.getName().equals("Bellatrix Lestrange and Voldemort") || boss.isAction()){
-            ForbiddenSpell.AvadaKedavra(boss, wizard);
+        //double cast = Math.random() * (4 - 1);
+        String bossName = boss.getName();
+
+        int possSpell = 0;
+
+        switch (bossName) {
+            case "Bellatrix Lestrange and Voldemort":
+                // Peut lancer Avada Kedavra
+                possSpell++;
+            case "Death Eaters":
+                // Peut lancer Doloris
+                possSpell++;
+            case "Peter Petigrow and Voldemort":
+                // Peut lancer Imperium
+                possSpell++;
         }
+
+        double cast = Math.round(Math.random() * possSpell);
+        if(boss.isAction()) cast=3;
+
+        switch ((int)cast) {
+            case 0:
+            case 1:
+                System.out.println(boss.getName() + " has used Imperium to make yourself hurt.");
+                ForbiddenSpell.Imperium(boss, wizard);
+                break;
+            case 2:
+                System.out.println(boss.getName() + " has used Doloris to inflict you pain.");
+                ForbiddenSpell.Doloris(boss, wizard);
+                break;
+            case 3:
+                ForbiddenSpell.AvadaKedavra(boss, wizard);
+                break;
+        }
+        GameLogic.anythingToContinue();
     }
 
     public float getCoefDamage() {
